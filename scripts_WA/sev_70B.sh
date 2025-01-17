@@ -4,7 +4,7 @@
 module load anaconda3/2023.09-0
 module load cuda/12.1.0
 
-source activate CLLM
+source activate TrafficSafe
 
 model_size=8B
 model_type=Llama-3.1
@@ -23,7 +23,6 @@ load_best_model_at_end=true
 cd train/sft/
 
 output_model=/scratch4/haofrankyang/yang/logs/${cur_date}/test_${data_source}_${dataset}/${model_type}_${model_size}_${predict_short}
-huggingface-cli login --token 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
 
 if [ ! -d ${output_model} ];then
     mkdir -p ${output_model}

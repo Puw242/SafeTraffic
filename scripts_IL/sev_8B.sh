@@ -5,7 +5,7 @@
 module load anaconda3/2023.09-0
 module load cuda/12.1.0
 
-source activate CLLM
+source activate TrafficSafe
 
 model_size=8B
 export HF_HOME=/scratch4/haofrankyang/yang/cache/huggingface
@@ -21,7 +21,6 @@ checkpoint_path=/scratch4/haofrankyang/yang/logs/1014/train_IL_text/8B_sev_4/che
 cd train/sft/
 
 output_model=/scratch4/haofrankyang/yang/logs/${cur_date}/test_${data_source}_${dataset}/${model_size}_${predict_short}_4
-huggingface-cli login --token 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
 
 if [ ! -d ${output_model} ];then
     mkdir -p ${output_model}

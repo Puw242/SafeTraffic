@@ -4,7 +4,7 @@
 module load anaconda3/2023.09-0
 module load cuda/12.1.0
 
-source activate CLLM
+source activate TrafficSafe
 
 model_size=8B
 model_type=Llama-3.1
