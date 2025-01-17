@@ -1,14 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=sev_IL
-#SBATCH --output=logs/1224/IL_sev_text_8B_test_4_467.txt
-#SBATCH --partition=ica100  # Specify the partition
-#SBATCH --gres=gpu:1  # Request 1 GPU
-#SBATCH --time=72:00:00  # Set a short job runtime
-#SBATCH --ntasks=1  # Number of task
-#SBATCH -A haofrankyang_gpu
-#SBATCH --cpus-per-task=16
 # Load the necessary CUDA module (if your cluster uses module environment)
-
 
 module load anaconda3/2023.09-0
 module load cuda/12.1.0
@@ -16,26 +7,26 @@ module load cuda/12.1.0
 source activate CLLM
 
 model_size=8B
-export HF_HOME=/scratch4/haofrankyang/yang/cache/huggingface
+HF_HOME=/scratch4/haofrankyang/yang/cache/huggingface
 master_port=$((RANDOM % 50 + 50000))
 include=localhost:0
-predict=severity
-predict_short=sev
-data_source=IL
+predict=number_of_injuried_people
+predict_short=inj
+data_source=WA
 dataset=text
-cur_date=1113
-checkpoint_path=/scratch4/haofrankyang/yang/logs/1014/train_IL_text/8B_sev_4/checkpoint-467
+cur_date=1006
+checkpoint_path=/scratch4/haofrankyang/yang/logs/1005/train_WA_text/8B_inj/checkpoint-400
 
 cd train/sft/
 
-output_model=/scratch4/haofrankyang/yang/logs/${cur_date}/test_${data_source}_${dataset}/${model_size}_${predict_short}_4
+output_model=/scratch4/haofrankyang/yang/logs/${cur_date}/test_${data_source}_${dataset}/${model_size}_${predict_short}
 huggingface-cli login --token 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
 
 if [ ! -d ${output_model} ];then
     mkdir -p ${output_model}
 fi
 export NCCL_P2P_DISABLE=1
-cp ../../scripts_IL/${predict_short}_test.slurm ${output_model}
+cp ../../scripts/${predict_short}.slurm ${output_model}
 
 deepspeed --master_port $master_port --include $include finetune_clm_lora.py \
     --model_name_or_path meta-llama/Llama-3.1-${model_size} \

@@ -1,68 +1,49 @@
 #!/bin/bash
-#SBATCH --job-name=type_7B
-#SBATCH --output=logs/1028/IL_type_7B.txt
-#SBATCH --partition=a100  # Specify the partition
-#SBATCH --gres=gpu:2  # Request 1 GPU
-#SBATCH --time=72:00:00  # Set a short job runtime
-#SBATCH --ntasks=1  # Number of task
-#SBATCH -A haofrankyang_gpu
-#SBATCH --mem=64G
-#SBATCH --cpus-per-task=2
 # Load the necessary CUDA module (if your cluster uses module environment)
+
 
 module load anaconda3/2023.09-0
 module load cuda/12.1.0
 
 source activate CLLM
 
-model_size=7b-hf
-model_type=Llama-2
+model_size=8B
 export HF_HOME=/scratch4/haofrankyang/yang/cache/huggingface
 master_port=$((RANDOM % 50 + 50000))
-include=localhost:0,1
-predict=accident_type
-predict_short=type
+include=localhost:0
+predict=severity
+predict_short=sev
 data_source=IL
 dataset=text
-cur_date=1028
-save_steps=50
-eval_steps=50
-load_best_model_at_end=true
+cur_date=1113
+checkpoint_path=/scratch4/haofrankyang/yang/logs/1014/train_IL_text/8B_sev_4/checkpoint-467
 
 cd train/sft/
 
-output_model=/scratch4/haofrankyang/yang/logs/${cur_date}/train_${data_source}_${dataset}/${model_type}_${model_size}_${predict_short}
+output_model=/scratch4/haofrankyang/yang/logs/${cur_date}/test_${data_source}_${dataset}/${model_size}_${predict_short}_4
 huggingface-cli login --token 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
 
 if [ ! -d ${output_model} ];then
     mkdir -p ${output_model}
 fi
 export NCCL_P2P_DISABLE=1
-cp ../../scripts/${predict_short}.slurm ${output_model}
+cp ../../scripts_IL/${predict_short}_test.slurm ${output_model}
 
 deepspeed --master_port $master_port --include $include finetune_clm_lora.py \
-    --model_name_or_path meta-llama/${model_type}-${model_size} \
+    --model_name_or_path meta-llama/Llama-3.1-${model_size} \
     --task_type ${predict} \
+    --resume_from_checkpoint ${checkpoint_path} \
     --train_files ../../../data/${data_source}/${dataset}/train/${predict_short}.csv \
     --validation_files  ../../../data/${data_source}/${dataset}/val/${predict_short}.csv \
     --test_files ../../../data/${data_source}/${dataset}/test/${predict_short}.csv \
     --data_source ${data_source} \
     --metric_for_best_model eval_f1 \
-    --save_total_limit 2 \
-    --load_best_model_at_end ${load_best_model_at_end} \
-    --per_device_train_batch_size 4 \
     --per_device_eval_batch_size 4 \
-    --do_train \
-    --do_eval \
     --do_predict \
     --use_fast_tokenizer false \
     --output_dir ${output_model} \
     --evaluation_strategy  steps \
     --max_eval_samples 9999 \
-    --learning_rate 3e-4 \
-    --gradient_accumulation_steps 8 \
-    --num_train_epochs 2 \
-    --warmup_steps 50 \
     --load_in_bits 4 \
     --lora_r 16 \
     --lora_alpha 32 \
@@ -72,15 +53,12 @@ deepspeed --master_port $master_port --include $include finetune_clm_lora.py \
     --logging_steps 10 \
     --save_strategy steps \
     --preprocessing_num_workers 10 \
-    --save_steps ${save_steps} \
-    --eval_steps ${eval_steps} \
     --seed 42 \
     --disable_tqdm false \
     --ddp_find_unused_parameters false \
     --block_size 20480 \
     --report_to tensorboard \
     --overwrite_output_dir \
-    --deepspeed ds_config_zero2.json \
     --ignore_data_skip true \
     --bf16 \
     --gradient_checkpointing \

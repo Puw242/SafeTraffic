@@ -1,12 +1,4 @@
 #!/bin/bash
-#SBATCH --job-name=WA_sev_test
-#SBATCH --output=logs/1112/WA_sev_test.txt
-#SBATCH --partition=a100  # Specify the partition
-#SBATCH --gres=gpu:2  # Request 1 GPU
-#SBATCH --time=72:00:00  # Set a short job runtime
-#SBATCH --ntasks=1  # Number of task
-#SBATCH -A haofrankyang_gpu
-#SBATCH --cpus-per-task=8
 # Load the necessary CUDA module (if your cluster uses module environment)
 
 module load anaconda3/2023.09-0

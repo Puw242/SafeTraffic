@@ -1,12 +1,4 @@
 #!/bin/bash
-#SBATCH --job-name=inj
-#SBATCH --output=logs/1113/IL_inj_text_8B_test.txt
-#SBATCH --partition=a100  # Specify the partition
-#SBATCH --gres=gpu:1  # Request 1 GPU
-#SBATCH --time=72:00:00  # Set a short job runtime
-#SBATCH --ntasks=1  # Number of task
-#SBATCH -A haofrankyang_gpu
-#SBATCH --cpus-per-task=4
 # Load the necessary CUDA module (if your cluster uses module environment)
 
 module load anaconda3/2023.09-0

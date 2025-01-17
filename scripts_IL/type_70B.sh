@@ -1,13 +1,4 @@
 #!/bin/bash
-#SBATCH --job-name=inj_70B
-#SBATCH --output=logs/1019/IL_inj_70B.txt
-#SBATCH --partition=ica100  # Specify the partition
-#SBATCH --gres=gpu:2  # Request 1 GPU
-#SBATCH --time=72:00:00  # Set a short job runtime
-#SBATCH --ntasks=1  # Number of task
-#SBATCH -A haofrankyang_gpu
-#SBATCH --mem=128G
-#SBATCH --cpus-per-task=8
 # Load the necessary CUDA module (if your cluster uses module environment)
 
 module load anaconda3/2023.09-0
@@ -15,16 +6,16 @@ module load cuda/12.1.0
 
 source activate CLLM
 
-model_size=70B
+model_size=8B
 export HF_HOME=/scratch4/haofrankyang/yang/cache/huggingface
 master_port=$((RANDOM % 50 + 50000))
 include=localhost:0,1
-predict=number_of_injuried_people
-predict_short=inj
+predict=accident_type
+predict_short=type
 data_source=IL
 dataset=text
-cur_date=1019
-save_steps=9999
+cur_date=1022
+save_steps=50
 eval_steps=50
 load_best_model_at_end=true
 
@@ -60,7 +51,7 @@ deepspeed --master_port $master_port --include $include finetune_clm_lora.py \
     --max_eval_samples 9999 \
     --learning_rate 3e-4 \
     --gradient_accumulation_steps 8 \
-    --num_train_epochs 4 \
+    --num_train_epochs 2 \
     --warmup_steps 50 \
     --load_in_bits 4 \
     --lora_r 16 \
