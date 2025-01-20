@@ -18,15 +18,16 @@ load_best_model_at_end=true
 output_dir=""
 
 # Parse Command Line Arguments
-while getopts "s:t:p:i:m:o:h" opt; do
+while getopts "s:t:d:p:i:m:o:h" opt; do
   case $opt in
     s) model_size="$OPTARG" ;; # Model size
     t) model_type="$OPTARG" ;; # Model type
+    d) data_source="$OPTARG" ;; #Data source
     p) predict="$OPTARG" ;; # Predict task
     i) include="$OPTARG" ;; # Include
     m) master_port="$OPTARG" ;; # Master port
     o) output_dir="$OPTARG" ;; # Output model directory
-    h) echo "Usage: $0 [-s model_size] [-t model_type] [-p predict_task] [-i include] [-m master_port] [-o output_dir]"; exit 0 ;;
+    h) echo "Usage: $0 [-s model_size] [-t model_type] [-d data_source] [-p predict_task] [-i include] [-m master_port] [-o output_dir]"; exit 0 ;;
     *) echo "Invalid option: -$OPTARG"; exit 1 ;;
   esac
 done
