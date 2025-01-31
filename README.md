@@ -7,7 +7,7 @@ We conduct experiments under CUDA 12.1 and Ubuntu 22.04 on Nvidia A100 GPU.
 
 Create conda environment
 ```
-conda create -n TrafficSafe python=3.10
+conda create -n TrafficSafe python=3.9
 source activate TrafficSafe
 ```
 Install the related packages.
