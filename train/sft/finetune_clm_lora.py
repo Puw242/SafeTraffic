@@ -24,7 +24,7 @@ from peft import (  # noqa: E402
     PeftModel,
     get_peft_model,
     get_peft_model_state_dict,
-    prepare_model_for_int8_training,
+    # prepare_model_for_kbit_training,
     prepare_model_for_kbit_training,
     set_peft_model_state_dict,
 )
@@ -589,7 +589,7 @@ def main():
             # device_map  = 'auto'
             device_map={"": int(os.environ.get("LOCAL_RANK") or 0)}
         )
-        # model = prepare_model_for_int8_training(model, output_embedding_layer_name="embed_out", layer_norm_names=[])
+        # model = prepare_model_for_kbit_training(model, output_embedding_layer_name="embed_out", layer_norm_names=[])
 
     else:
         model = AutoModelForCausalLM.from_config(config)
@@ -608,7 +608,7 @@ def main():
 
 
     if model_args.load_in_bits==8:
-        model = prepare_model_for_int8_training(model)
+        model = prepare_model_for_kbit_training(model)
     elif model_args.load_in_bits==4:
         model = prepare_model_for_kbit_training(model)
 

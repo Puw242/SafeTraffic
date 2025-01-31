@@ -9,7 +9,6 @@ anyio==4.6.0
 async-timeout==4.0.3
 attrs==24.2.0
 bitsandbytes==0.44.1
-Bottleneck @ file:///croot/bottleneck_1707864210935/work
 category-encoders==2.6.4
 certifi==2024.8.30
 charset-normalizer==3.3.2
@@ -41,31 +40,25 @@ httpcore==1.0.5
 httpx==0.27.2
 huggingface-hub==0.25.1
 idna==3.10
-imagecodecs @ file:///croot/imagecodecs_1734436728732/work
-imageio @ file:///croot/imageio_1707247282708/work
 importlib_metadata==8.5.0
 importlib_resources==6.4.5
 iniconfig==2.0.0
 Jinja2==3.1.4
 joblib==1.4.2
 kiwisolver==1.4.7
-lazy_loader @ file:///croot/lazy_loader_1718176737906/work
 Markdown==3.7
 markdown-it-py==3.0.0
 MarkupSafe==2.1.5
 matplotlib==3.9.2
 mdurl==0.1.2
-mkl-service==2.4.0
-mkl_fft @ file:///croot/mkl_fft_1725370245198/work
-mkl_random @ file:///croot/mkl_random_1725370241878/work
 mpi4py==4.0.1
 mpmath==1.3.0
 multidict==6.1.0
 multiprocess==0.70.16
-networkx @ file:///croot/networkx_1717597493534/work
+networkx==3.2.1
 ninja==1.11.1.1
-numexpr @ file:///croot/numexpr_1696515281613/work
-numpy @ file:///croot/numpy_and_numpy_base_1708638617955/work/dist/numpy-1.26.4-cp39-cp39-linux_x86_64.whl#sha256=6094eeedd869502faa0fd0a8c5ad3a70c5779be06ddd1feb7627e5c212fac420
+numexpr==2.9.0
+numpy==1.26.4
 nvidia-cublas-cu12==12.1.3.1
 nvidia-cuda-cupti-cu12==12.1.105
 nvidia-cuda-nvrtc-cu12==12.1.105
@@ -81,7 +74,7 @@ nvidia-nvjitlink-cu12==12.6.68
 nvidia-nvtx-cu12==12.1.105
 orjson==3.10.7
 packaging==24.1
-pandas @ file:///home/conda/feedstock_root/build_artifacts/pandas_1726878406085/work
+pandas==2.2.1
 patsy==0.5.6
 peft==0.13.2
 pillow==10.4.0
@@ -98,25 +91,25 @@ Pygments==2.18.0
 pynvml==11.5.3
 pyparsing==3.1.4
 pytest==8.3.3
-python-dateutil @ file:///croot/python-dateutil_1716495738603/work
+python-dateutil==2.9.0
 python-multipart==0.0.11
-pytz @ file:///croot/pytz_1713974312559/work
+pytz==2024.1
 PyYAML==6.0.2
 regex==2024.9.11
 requests==2.32.3
 rich==13.8.1
 ruff==0.6.8
 safetensors==0.4.5
-scikit-image @ file:///croot/scikit-image_1726737398091/work
+scikit-image==0.22.0
 scikit-learn==1.5.2
 scikit-optimize==0.10.2
-scipy @ file:///croot/scipy_1733756309941/work/dist/scipy-1.13.1-cp39-cp39-linux_x86_64.whl#sha256=a4372e07d982a377bda57ec71fd74ac403442571e1d717de47325a14dea5c278
+scipy==1.13.1
 seaborn==0.13.2
 semantic-version==2.10.0
 sentencepiece==0.2.0
 shellingham==1.5.4
 shtab==1.7.1
-six @ file:///tmp/build/80754af9/six_1644875935023/work
+six==1.16.0
 sniffio==1.3.1
 starlette==0.38.6
 statsmodels==0.14.4
@@ -124,7 +117,7 @@ sympy==1.13.3
 tensorboard==2.18.0
 tensorboard-data-server==0.7.2
 threadpoolctl==3.5.0
-tifffile @ file:///croot/tifffile_1695107451082/work
+tifffile==2024.2.12
 tokenizers==0.20.0
 tomli==2.0.1
 tomlkit==0.12.0
@@ -137,7 +130,7 @@ trl==0.11.4
 typer==0.12.5
 typing_extensions==4.12.2
 tyro==0.8.12
-tzdata @ file:///croot/python-tzdata_1690578112552/work
+tzdata==2024.1
 urllib3==2.2.3
 uvicorn==0.31.0
 websockets==12.0

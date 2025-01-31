@@ -2,7 +2,7 @@
 # Module and Environment Setup
 module load anaconda3/2023.09-0
 module load cuda/12.1.0
-source activate CLLM
+conda activate TrafficSafe
 
 # Default Values
 model_size="8B"
@@ -47,7 +47,6 @@ esac
 
 # Create Output Directory
 mkdir -p ${output_dir}
-cp ../../scripts/${predict_short}.slurm ${output_dir}
 
 # Run Deepspeed
 cd ../train/sft/
