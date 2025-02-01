@@ -20,3 +20,5 @@ Run the following command to train an 8B Llama-3.1 model on the Illinois (IL) da
 ```
 bash train_TrafficSafe.sh -s 8B -t Llama-3.1 -d IL -p severity -i localhost:0,1 -m 50001 -o "./"
 ```
+
+It will take around 150 mins using 2 Nvidia A100 GPUs to complete the fine-tuning process.
