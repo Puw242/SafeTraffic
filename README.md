@@ -1,6 +1,9 @@
 <div align="center">
+  
 # TrafficSafe: Customizing Large Language Models for Reliable and Interpretable Traffic Crash Prediction and Safety Interventions
+
 </div>
+
 ![TrafficSafe Icon](assets/TrafficSafe_icon.gif)
 
 ## Set up environment
