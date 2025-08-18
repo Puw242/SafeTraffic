@@ -3,8 +3,6 @@
 # SafeTraffic Decision Copilot: Adapting Large Language Models for Trustworthy Crash Risk Assessments and Policy Interventions
 </div>
 
-![TrafficSafe Icon](assets/TrafficSafe_icon.gif)
-
 ## Set up environment
 We conduct experiments under CUDA 12.1 and Ubuntu 22.04 on Nvidia A100 GPU.
 
