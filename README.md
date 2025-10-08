@@ -1,6 +1,6 @@
 <div align="center">
   
-# SafeTraffic Decision Copilot: Adapting Large Language Models for Trustworthy Crash Risk Assessments and Policy Interventions
+# SafeTraffic Copilot: adapting large language models for trustworthy traffic safety assessments and decision interventions
 
 🎉 Our paper has been accepted by Nature Communications! You can read it [here](https://www.nature.com/articles/s41467-025-64574-w#citeas).
 </div>
